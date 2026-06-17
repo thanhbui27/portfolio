@@ -26,7 +26,7 @@ export const socialLinks: SocialLink[] = [
     id: "facebook",
     label: "Facebook",
     href: "https://www.facebook.com/buithanhtekk/",
-    platform: "website",
+    platform: "facebook",
     order: 4,
   },
   {

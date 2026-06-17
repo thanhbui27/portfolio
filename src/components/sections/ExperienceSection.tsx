@@ -14,7 +14,9 @@ const tagColors = ["bg-banana", "bg-violet text-white", "bg-[#e2e2e2]"];
 export function ExperienceSection({ experience, content }: ExperienceSectionProps) {
   return (
     <MotionSection
+      animateOnMount
       className="relative mx-auto max-w-7xl px-4 pb-0 pt-10 sm:px-6 lg:pt-16"
+      delay={0.96}
       id="experience"
     >
       <Sparkles

@@ -18,7 +18,7 @@ export const siteConfig: SiteConfig = {
   ],
   cta: {
     label: "Hire Me",
-    href: "bnthanh.it@gmail.com",
+    href: "mailto:bnthanh.it@gmail.com",
   },
   footer: {
     text: "INSERT COIN TO CONTINUE",
@@ -28,9 +28,11 @@ export const siteConfig: SiteConfig = {
     techStack: "Tech Stack",
     screenshots: "Screenshots",
     livePreview: "Live Preview",
+    videoDemo: "Video Demo",
     openDemo: "Open Demo",
     fullscreen: "Fullscreen",
     repository: "Repository",
+    store: "Store",
     liveSite: "Live Site",
     unityDemo: "Unity Demo",
   },

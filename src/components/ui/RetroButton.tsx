@@ -16,6 +16,7 @@ interface RetroButtonProps {
   children: ReactNode;
   tone?: ButtonTone;
   icon?: ComponentType<LucideProps>;
+  iconNode?: ReactNode;
   className?: string;
   onClick?: () => void;
   title?: string;
@@ -26,14 +27,15 @@ export function RetroButton({
   children,
   tone = "pink",
   icon: Icon,
+  iconNode,
   className = "",
   onClick,
   title
 }: RetroButtonProps) {
-  const classes = `retro-focus inline-flex min-h-11 items-center justify-center gap-2 border-4 border-ink px-5 py-3 font-display text-base font-bold uppercase leading-none shadow-retro-sm transition-transform hover:-translate-y-0.5 active:translate-x-1 active:translate-y-1 active:shadow-none ${toneClass[tone]} ${className}`;
+  const classes = `retro-focus pixel-press hover-signal inline-flex min-h-11 items-center justify-center gap-2 border-4 border-ink px-5 py-3 font-display text-base font-bold uppercase leading-none shadow-retro-sm ${toneClass[tone]} ${className}`;
   const content = (
     <>
-      {Icon ? <Icon aria-hidden="true" className="h-5 w-5" strokeWidth={3} /> : null}
+      {iconNode ?? (Icon ? <Icon aria-hidden="true" className="h-5 w-5" strokeWidth={3} /> : null)}
       <span>{children}</span>
     </>
   );

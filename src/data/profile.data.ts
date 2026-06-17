@@ -22,7 +22,7 @@ export const profile: Profile = {
   location: "Da Nang, Viet Nam",
   experienceSummary: "2+ Years Exp",
   traits: ["Retro Gamer", "Coffee Powered"],
-  heroStickers: ["React", "Java", "Spring Boot", "MySQL"],
+  heroStickers: ["React", "Java", "Spring Boot", "MySQL", "C#", "Unity", ".Net"],
   aboutParagraphs: [
     "I am a dedicated Software Engineer with a strong foundation in C#, ASP.NET Core, SQL Server, and modern web application development. I have experience building robust backend systems, developing RESTful APIs, and creating scalable software solutions.",
     "My background also includes frontend development with React and TypeScript, as well as game development with Unity and C#. Working across different technology stacks has helped me develop strong problem-solving skills and adaptability.",
@@ -42,12 +42,12 @@ export const profile: Profile = {
   `);
   },
   contact: {
-    email: "hello@thanh.dev",
-    phone: "+84 000 000 000",
-    location: "Saigon, Vietnam",
+    email: "bnthanh.it@gmail.com",
+    phone: "+84 393256 471",
+    location: "Da Nang, Vietnam",
     availability: "Open for Projects",
-    discord: "thanh_dev#1337",
-    telegram: "@thanh_dev",
+    discord: "@yukine2701",
+    telegram: "@yukine_27",
   },
 };
 

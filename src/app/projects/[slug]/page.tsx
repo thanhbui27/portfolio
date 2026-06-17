@@ -58,12 +58,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <div className="flex min-h-screen flex-col overflow-hidden">
-      <Navbar
-        brandClassName="text-berry italic"
-        brandLabel={config.arcadeBrand}
-        config={config}
-        visibleSections={sections}
-      />
+      <Navbar config={config} visibleSections={sections} />
       {project.type === "game" ? (
         <GameProjectDetail labels={config.projectDetailLabels} project={project} />
       ) : (

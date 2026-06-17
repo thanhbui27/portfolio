@@ -38,9 +38,11 @@ export interface SiteConfig {
     techStack: string;
     screenshots: string;
     livePreview: string;
+    videoDemo: string;
     openDemo: string;
     fullscreen: string;
     repository: string;
+    store: string;
     liveSite: string;
     unityDemo: string;
   };
@@ -145,6 +147,7 @@ export interface ProjectArchiveCard {
   category: string;
   buttonLabel: string;
   tone: "pink" | "purple" | "yellow" | "black";
+  thumbnailBackground?: string;
 }
 
 export interface ProjectDetailFeature {
@@ -169,6 +172,19 @@ export interface ProjectDetailContent {
   coreFeatures: ProjectDetailFeature[];
 }
 
+export interface ProjectRepositoryLink {
+  label: string;
+  href: string;
+  order: number;
+}
+
+export interface ProjectStoreLink {
+  label: string;
+  href: string;
+  platform: "appStore" | "googlePlay" | "itch" | "steam" | "web" | "other";
+  order: number;
+}
+
 export interface Project {
   id: string;
   slug: string;
@@ -181,9 +197,12 @@ export interface Project {
   techStack: string[];
   archive: ProjectArchiveCard;
   detail: ProjectDetailContent;
+  repositoryLinks?: ProjectRepositoryLink[];
+  storeLinks?: ProjectStoreLink[];
   githubUrl?: string;
   liveDemoUrl?: string;
   unityWebglUrl?: string;
+  videoDemoUrl?: string;
   featured: boolean;
   status: PublishStatus;
   order: number;
@@ -243,7 +262,7 @@ export interface SocialLink {
   id: string;
   label: string;
   href: string;
-  platform: "github" | "linkedin" | "twitter" | "discord" | "email" | "website";
+  platform: "discord" | "email" | "facebook" | "github" | "linkedin" | "twitter" | "website";
   order: number;
 }
 

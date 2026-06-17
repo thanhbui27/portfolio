@@ -1,19 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  AtSign,
-  BriefcaseBusiness,
-  Code2,
-  ExternalLink,
   Gamepad2,
   Network,
   Smile,
   Sparkles,
   UserCircle,
-  UsersRound
 } from "lucide-react";
 import type { ContactInfoCard, ContactPageContent, SocialLink } from "@/types/portfolio";
 import { MotionSection } from "@/components/ui/MotionSection";
+import { BrandIcon, type BrandIconName } from "@/components/ui/BrandIcon";
 
 interface ContactSectionProps {
   content: ContactPageContent;
@@ -26,12 +22,8 @@ const toneClasses: Record<ContactInfoCard["tone"], string> = {
   pink: "bg-[#ffd9df]"
 };
 
-const iconById = {
-  email: AtSign,
-  github: Code2,
-  linkedin: BriefcaseBusiness,
-  facebook: UsersRound
-};
+const getSocialIconName = (link: SocialLink): BrandIconName =>
+  link.id === "facebook" ? "facebook" : link.platform;
 
 export function ContactSection({ content, socialLinks }: ContactSectionProps) {
   const networkLinks = content.networkLinkIds
@@ -106,25 +98,21 @@ export function ContactSection({ content, socialLinks }: ContactSectionProps) {
 
             <div className="border-4 border-ink bg-[#f9f9f9] p-6 shadow-retro">
               <div className="divide-y-4 divide-ink">
-                {networkLinks.map((link) => {
-                  const Icon = iconById[link.id as keyof typeof iconById] ?? ExternalLink;
-
-                  return (
-                    <Link
-                      className="retro-focus flex items-center gap-4 px-3 py-5 hover:bg-banana"
-                      href={link.href}
-                      key={link.id}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <span className="grid h-10 w-10 place-items-center bg-ink text-white">
-                        <Icon aria-hidden="true" className="h-5 w-5" strokeWidth={3} />
-                      </span>
-                      <span className="font-mono text-lg font-bold uppercase">{link.label}</span>
-                      <ExternalLink aria-hidden="true" className="ml-auto h-4 w-4" strokeWidth={3} />
-                    </Link>
-                  );
-                })}
+                {networkLinks.map((link) => (
+                  <Link
+                    className="retro-focus flex items-center gap-4 px-3 py-5 hover:bg-banana"
+                    href={link.href}
+                    key={link.id}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <span className="grid h-10 w-10 place-items-center bg-ink text-white">
+                      <BrandIcon className="h-5 w-5" name={getSocialIconName(link)} />
+                    </span>
+                    <span className="font-mono text-lg font-bold uppercase">{link.label}</span>
+                    <BrandIcon className="ml-auto h-4 w-4" name="external" />
+                  </Link>
+                ))}
               </div>
             </div>
           </section>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Bricolage_Grotesque, Space_Mono, Work_Sans } from "next/font/google";
 import "./globals.css";
+import { PageLoader } from "@/components/layout/PageLoader";
 import { getSiteConfig } from "@/lib/portfolio-service";
 
 const display = Bricolage_Grotesque({
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={`${display.variable} ${body.variable} ${mono.variable} font-body`}>
+        <PageLoader />
         {children}
       </body>
     </html>

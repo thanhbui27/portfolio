@@ -1,11 +1,13 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import type { PageSectionSetting, SiteConfig } from "@/types/portfolio";
 import { RetroButton } from "@/components/ui/RetroButton";
+import Logo from "@/images/logo.png";
 
 interface NavbarProps {
   config: SiteConfig;
@@ -20,16 +22,30 @@ export function Navbar({ config, visibleSections, brandLabel = config.siteName, 
   const visibleKeys = new Set(visibleSections.map((section) => section.sectionKey));
   const navItems = config.nav.filter((item) => !item.sectionKey || visibleKeys.has(item.sectionKey));
   const isActive = (href: string) => pathname === href || (href !== "/" && pathname.startsWith(href));
+  const usesDefaultBrand = brandLabel === config.siteName;
 
   return (
     <header className="sticky top-0 z-50 w-full max-w-full border-b-4 border-ink bg-[#f9f9f9]">
       <nav className="relative mx-auto flex w-full max-w-full items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:max-w-7xl">
         <Link
-          className={`retro-focus block min-w-0 max-w-[calc(100vw-5.5rem)] truncate font-display text-2xl font-bold uppercase leading-none sm:text-3xl lg:max-w-none lg:text-4xl ${brandClassName}`}
+          className={`retro-focus block min-w-0 max-w-[calc(100vw-5.5rem)] ${
+            usesDefaultBrand
+              ? "logo-link shrink-0"
+              : `truncate font-display text-2xl font-bold uppercase leading-none sm:text-3xl lg:max-w-none lg:text-4xl ${brandClassName}`
+          }`}
           href="/"
           onClick={() => setIsOpen(false)}
         >
-          {brandLabel}
+          {usesDefaultBrand ? (
+            <Image
+              alt={config.siteName}
+              className="intro-logo logo-glitch inline-block h-12 w-auto sm:h-14 lg:h-16"
+              priority
+              src={Logo}
+            />
+          ) : (
+            brandLabel
+          )}
         </Link>
         <div className="hidden items-center gap-3 lg:flex">
           {navItems.map((item) => (
