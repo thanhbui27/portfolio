@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: #050505;
+  background:
+    radial-gradient(circle at 50% 34rem, #ff5b8a 0 8rem, transparent 8.1rem),
+    linear-gradient(90deg, #f6d9df 0%, #f6d9df 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+iframe {
+  display: block;
+}
+
+::selection {
+  color: #fffdf8;
+  background: #b41f53;
+}
+
+@layer components {
+  .retro-focus {
+    @apply focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-berry;
+  }
+}
