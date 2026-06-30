@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import type { Project, ProjectArchiveContent } from "@/types/portfolio";
+import type { FocusProfile } from "@/lib/project-focus";
 import { MotionSection } from "@/components/ui/MotionSection";
 import { ProjectCard } from "@/components/project/ProjectCard";
 
@@ -18,6 +19,8 @@ type ProjectFilterId = ProjectArchiveContent["filters"][number]["id"];
 interface ProjectsSectionProps {
   projects: Project[];
   content: ProjectArchiveContent;
+  focus?: FocusProfile | null;
+  focusedIds?: string[];
 }
 
 const matchesFilter = (project: Project, filterId: ProjectFilterId) => {
@@ -48,14 +51,23 @@ const matchesFilter = (project: Project, filterId: ProjectFilterId) => {
   );
 };
 
-export function ProjectsSection({ projects, content }: ProjectsSectionProps) {
+export function ProjectsSection({
+  projects,
+  content,
+  focus = null,
+  focusedIds = [],
+}: ProjectsSectionProps) {
+  const focusedIdSet = useMemo(() => new Set(focusedIds), [focusedIds]);
   const [activeFilter, setActiveFilter] = useState<ProjectFilterId>(
-    content.filters[0]?.id ?? "all",
+    focus?.filterId ?? content.filters[0]?.id ?? "all",
   );
   const filteredProjects = useMemo(
     () => projects.filter((project) => matchesFilter(project, activeFilter)),
     [activeFilter, projects],
   );
+
+  const headlineHighlight = focus?.headline ?? content.highlight;
+  const description = focus?.description ?? content.description;
 
   return (
     <MotionSection
@@ -65,12 +77,18 @@ export function ProjectsSection({ projects, content }: ProjectsSectionProps) {
       id="projects"
     >
       <div className="mx-auto max-w-4xl text-center">
+        {focus ? (
+          <span className="mb-5 inline-flex items-center gap-2 border-4 border-ink bg-banana px-4 py-2 font-mono text-xs font-bold uppercase text-ink shadow-retro-sm">
+            <span aria-hidden="true" className="h-3 w-3 border-2 border-ink bg-berry" />
+            Focus: {focus.label}
+          </span>
+        ) : null}
         <h1 className="break-words font-display text-4xl font-bold uppercase leading-none sm:text-7xl lg:text-8xl">
-          {content.title} <span className="block text-berry sm:inline">{content.highlight}</span>
+          {content.title} <span className="block text-berry sm:inline">{headlineHighlight}</span>
         </h1>
         <div className="mt-6 w-full max-w-[calc(100vw-2rem)] border-4 border-ink bg-[#f9f9f9] px-5 py-4 shadow-retro sm:max-w-none">
           <p className="break-words font-mono text-xs font-bold leading-relaxed text-[#3a2930] sm:text-sm">
-            {content.description}
+            {description}
           </p>
         </div>
       </div>
@@ -94,7 +112,9 @@ export function ProjectsSection({ projects, content }: ProjectsSectionProps) {
       </div>
 
       <p className="mt-6 text-center font-mono text-xs font-bold uppercase text-[#584045]">
-        {filteredProjects.length} / {projects.length} projects loaded
+        {focus
+          ? `${focusedIdSet.size} ${focus.label} matches up top · ${filteredProjects.length} / ${projects.length} loaded`
+          : `${filteredProjects.length} / ${projects.length} projects loaded`}
       </p>
 
       <motion.div
@@ -111,7 +131,11 @@ export function ProjectsSection({ projects, content }: ProjectsSectionProps) {
         }}
       >
         {filteredProjects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+          <ProjectCard
+            key={project.id}
+            project={project}
+            focused={focusedIdSet.has(project.id)}
+          />
         ))}
       </motion.div>
 

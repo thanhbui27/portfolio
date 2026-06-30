@@ -2,28 +2,38 @@ import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { getProjects, getProjectsPageContent, getVisibleSectionByKey } from "@/lib/portfolio-service";
-import { getActiveFocus } from "@/lib/focus-server";
-import { applyFocus, resolveFocus } from "@/lib/project-focus";
+import { applyFocus, focusSlugs, resolveFocus } from "@/lib/project-focus";
 
-interface ProjectsPageProps {
-  searchParams: Promise<{ focus?: string | string[] }>;
+// Only the known focus slugs (e.g. /unity, /fullstack) are valid.
+// Any other single-segment path that is not a static route will 404.
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return focusSlugs.map((focus) => ({ focus }));
 }
 
-export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
-  const [{ focus: focusParam }, projects, content, section, activeFocus] = await Promise.all([
-    searchParams,
+interface FocusPageProps {
+  params: Promise<{ focus: string }>;
+}
+
+export default async function FocusPage({ params }: FocusPageProps) {
+  const { focus: focusParam } = await params;
+  const focus = resolveFocus(focusParam);
+
+  if (!focus) {
+    notFound();
+  }
+
+  const [projects, content, section] = await Promise.all([
     getProjects(),
     getProjectsPageContent(),
-    getVisibleSectionByKey("projects"),
-    getActiveFocus()
+    getVisibleSectionByKey("projects")
   ]);
 
   if (!section) {
     notFound();
   }
 
-  // An explicit ?focus= query wins; otherwise fall back to the persisted focus.
-  const focus = resolveFocus(focusParam) ?? activeFocus;
   const { ordered, matchedIds } = applyFocus(projects, focus);
 
   return (

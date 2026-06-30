@@ -5,6 +5,7 @@ import { Download, Send } from "lucide-react";
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import type { Profile } from "@/types/portfolio";
+import { textMatchesFocus, type FocusProfile } from "@/lib/project-focus";
 import { fadeUpItem, MotionSection } from "@/components/ui/MotionSection";
 import { RetroButton } from "@/components/ui/RetroButton";
 import { Sticker } from "@/components/ui/Sticker";
@@ -12,6 +13,7 @@ import ImageFrame from "@/images/Frame.png";
 
 interface HeroSectionProps {
   profile: Profile;
+  focus?: FocusProfile | null;
 }
 
 const stickerStyles = [
@@ -24,7 +26,7 @@ const stickerStyles = [
   "-left-2 bottom-28 bg-white",
 ];
 
-export function HeroSection({ profile }: HeroSectionProps) {
+export function HeroSection({ profile, focus = null }: HeroSectionProps) {
   const heroTitle = `${profile.heroTitle} ${profile.heroHighlight}`;
 
   return (
@@ -105,15 +107,24 @@ export function HeroSection({ profile }: HeroSectionProps) {
             height={400}
           />
         </div>
-        {profile.heroStickers.map((label, index) => (
-          <Sticker
-            className={`absolute float-slower intro-delay ${stickerStyles[index % stickerStyles.length]}`}
-            key={label}
-            style={{ animationDelay: `${0.96 + index * 0.18}s` } as CSSProperties}
-          >
-            {label}
-          </Sticker>
-        ))}
+        {profile.heroStickers.map((label, index) => {
+          const isMatch = focus ? textMatchesFocus(label, focus) : false;
+          return (
+            <Sticker
+              className={`absolute float-slower intro-delay ${stickerStyles[index % stickerStyles.length]} ${
+                isMatch
+                  ? "z-20 scale-110 ring-4 ring-berry ring-offset-2 ring-offset-paper"
+                  : focus
+                    ? "opacity-50"
+                    : ""
+              }`}
+              key={label}
+              style={{ animationDelay: `${0.96 + index * 0.18}s` } as CSSProperties}
+            >
+              {label}
+            </Sticker>
+          );
+        })}
       </motion.div>
     </MotionSection>
   );
