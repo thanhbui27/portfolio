@@ -1,6 +1,7 @@
 import type { ContactPageContent, Profile } from "@/types/portfolio";
 import ImageFrame from "../images/me-avat-bg.png";
 import AvatarUrl from "../images/me-transparent.png";
+
 const svgData = (svg: string) =>
   `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 
@@ -17,12 +18,20 @@ export const profile: Profile = {
   },
   secondaryAction: {
     label: "Download CV",
-    href: "/Thanh-CV.pdf",
+    href: "/CV_Unity.pdf",
   },
   location: "Da Nang, Viet Nam",
   experienceSummary: "2+ Years Exp",
   traits: ["Retro Gamer", "Coffee Powered"],
-  heroStickers: ["React", "Java", "Spring Boot", "MySQL", "C#", "Unity", ".Net"],
+  heroStickers: [
+    "React",
+    "Java",
+    "Spring Boot",
+    "MySQL",
+    "C#",
+    "Unity",
+    ".Net",
+  ],
   aboutParagraphs: [
     "I am a dedicated Software Engineer with a strong foundation in C#, ASP.NET Core, SQL Server, and modern web application development. I have experience building robust backend systems, developing RESTful APIs, and creating scalable software solutions.",
     "My background also includes frontend development with React and TypeScript, as well as game development with Unity and C#. Working across different technology stacks has helped me develop strong problem-solving skills and adaptability.",
