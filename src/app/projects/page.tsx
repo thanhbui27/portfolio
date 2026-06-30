@@ -2,39 +2,22 @@ import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { getProjects, getProjectsPageContent, getVisibleSectionByKey } from "@/lib/portfolio-service";
-import { getActiveFocus } from "@/lib/focus-server";
-import { applyFocus, resolveFocus } from "@/lib/project-focus";
 
-interface ProjectsPageProps {
-  searchParams: Promise<{ focus?: string | string[] }>;
-}
-
-export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
-  const [{ focus: focusParam }, projects, content, section, activeFocus] = await Promise.all([
-    searchParams,
+export default async function ProjectsPage() {
+  const [projects, content, section] = await Promise.all([
     getProjects(),
     getProjectsPageContent(),
-    getVisibleSectionByKey("projects"),
-    getActiveFocus()
+    getVisibleSectionByKey("projects")
   ]);
 
   if (!section) {
     notFound();
   }
 
-  // An explicit ?focus= query wins; otherwise fall back to the persisted focus.
-  const focus = resolveFocus(focusParam) ?? activeFocus;
-  const { ordered, matchedIds } = applyFocus(projects, focus);
-
   return (
     <PageShell>
       <div className="pt-10 lg:pt-16">
-        <ProjectsSection
-          content={content}
-          projects={ordered}
-          focus={focus}
-          focusedIds={Array.from(matchedIds)}
-        />
+        <ProjectsSection content={content} projects={projects} />
       </div>
     </PageShell>
   );

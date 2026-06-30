@@ -20,27 +20,17 @@ const getRepositoryIconName = (href: string) =>
 
 interface ProjectCardProps {
   project: Project;
-  focused?: boolean;
 }
 
-export function ProjectCard({ project, focused = false }: ProjectCardProps) {
+export function ProjectCard({ project }: ProjectCardProps) {
   const thumbnailBackground = project.archive.thumbnailBackground ?? "#b41f53";
   const primaryRepositoryUrl = project.repositoryLinks?.[0]?.href ?? project.githubUrl;
 
   return (
     <motion.article
-      className={`hover-signal group relative w-full max-w-[calc(100vw-2rem)] border-4 border-ink p-4 shadow-retro transition-transform hover:-translate-y-1 sm:max-w-none ${
-        focused
-          ? "bg-blush ring-4 ring-banana ring-offset-2 ring-offset-paper"
-          : "bg-[#f9f9f9]"
-      }`}
+      className="hover-signal group w-full max-w-[calc(100vw-2rem)] border-4 border-ink bg-[#f9f9f9] p-4 shadow-retro transition-transform hover:-translate-y-1 sm:max-w-none"
       variants={fadeUpItem}
     >
-      {focused ? (
-        <span className="absolute -right-3 -top-3 z-10 rotate-3 border-4 border-ink bg-banana px-3 py-1 font-display text-sm font-bold uppercase leading-none text-ink shadow-retro-sm">
-          ★ Match
-        </span>
-      ) : null}
       <div className="relative aspect-[16/10] overflow-hidden border-4 border-ink bg-[#2c1f48] p-4 sm:p-6">
         <div className="h-full border-[10px] border-[#f9f9f9] bg-ink p-2 shadow-[0_0_0_4px_#1b1b1b] sm:border-[14px]">
           <div
