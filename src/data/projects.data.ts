@@ -1,4 +1,10 @@
 import type { Project, ProjectArchiveContent } from "@/types/portfolio";
+import LogoImpact from "@/images/logo impact arena.png";
+import LogoTig from "@/images/App Icon tight trope.png";
+import LogoSmar from "@/images/logo hide smash.png";
+import LogoLegacy from "@/images/legacy.png";
+import LogoBounty from "@/images/200x200bb-75.png";
+import LogoMetaHorse from "@/images/icon0001-1-192x192.jpg";
 
 const svgData = (svg: string) =>
   `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
@@ -133,7 +139,7 @@ export const projects: Project[] = [
       "A published mobile Unity project where I developed gameplay features, UI systems, video playback, API integration, sockets, ads, and push notifications.",
     description:
       "Bounty Hunter is a published mobile-store Unity project. My work focused on maintaining game features with Unity and C#, improving dynamic UI layouts, handling video playback with Unity VideoPlayer, integrating backend services, working with socket-based real-time features, and supporting third-party SDKs such as Tapjoy and Firebase Cloud Messaging.",
-    thumbnail: projectArtwork("BOUNTY HUNTER", "#b41f53", "game"),
+    thumbnail: LogoBounty.src,
     images: [
       projectImage("BOUNTY HUNTER", "#2c1f48", "#b41f53", "game"),
       projectImage("MOBILE BUILD", "#ffd9df", "#6b38d4", "game"),
@@ -269,7 +275,7 @@ export const projects: Project[] = [
       "A Unity project where I maintained existing features, adjusted UI from design requirements, integrated backend APIs, and improved build stability.",
     description:
       "Metahourse involved maintaining and updating Unity project features, implementing and adjusting UI elements based on design requirements, fixing UI issues, improving layout consistency across screens, supporting backend API integration, and collaborating with teammates for stable builds.",
-    thumbnail: projectArtwork("METAHOURSE", "#6b38d4", "game"),
+    thumbnail: LogoMetaHorse.src,
     images: [
       projectImage("METAHOURSE", "#e9ddff", "#6b38d4", "game"),
       projectImage("UNITY UI", "#ffd9df", "#b41f53", "game"),
@@ -586,7 +592,7 @@ export const projects: Project[] = [
         order: 1,
       },
     ],
-    
+
     // videoDemoUrl: "https://drive.google.com/file/d/.../view",
     featured: true,
     status: "published",
@@ -943,6 +949,524 @@ export const projects: Project[] = [
     featured: true,
     status: "published",
     order: 7,
+  },
+  {
+    id: "prop-hunt",
+    slug: "prop-hunt",
+    title: "Prop Hunt",
+    type: "game",
+    shortDescription:
+      "A 3D mobile hide-and-seek game built in Cocos Creator with TypeScript, featuring AI that disguises as props, procedural map generation, a data-driven level system, and a custom UI framework.",
+    description:
+      "Prop Hunt is a casual 3D top-down mobile game where the player roams a procedurally generated map with a virtual joystick to find and smash AI hiders disguised as everyday props (boxes, bushes, rocks, crates). Each level has a limited number of AI and smash charges: hit a disguised AI to score, but waste a charge if you smash a real prop. The project includes deterministic seeded map generation, finite state machines for both game flow and AI behavior, object pooling, raycast-based hit detection, a 20-level handcrafted JSON config with infinite procedural fallback, progress persistence, and a custom popup-based UI system.",
+    thumbnail: LogoSmar.src,
+    images: [
+      projectImage("PROP HUNT", "#1f6f43", "#9be15d", "game"),
+      projectImage("HIDE & SEEK", "#14532d", "#34d399", "game"),
+    ],
+    techStack: [
+      "Cocos Creator 3.8",
+      "TypeScript",
+      "3D",
+      "Procedural Generation",
+      "State Machine",
+      "Object Pooling",
+    ],
+    archive: {
+      number: "04",
+      category: "Mobile 3D Game",
+      buttonLabel: "View Details",
+      tone: "yellow",
+      thumbnailBackground: "#1f6f43",
+    },
+    detail: {
+      levelLabel: "Level: 3D Casual Hide & Seek",
+      overviewTitle: "Operational Overview",
+      overviewParagraphs: [
+        "Prop Hunt is a 3D top-down mobile game built with Cocos Creator 3.8 and TypeScript, set in procedurally generated outdoor maps.",
+        "The project includes virtual joystick movement, smooth follow camera, AI hiders that disguise themselves as props, a smash-and-reveal mechanic, HUD elements, a data-driven level system, and a custom UI framework with animated popups.",
+      ],
+      specsTitle: "Tech Blueprints",
+      loadoutTitle: "Loadout",
+      missionTitle: "Development Log",
+      featuresTitle: "Core Features",
+      statusLabel: "Status: Personal Project",
+      stickerLabel: "Casual",
+      specs: [
+        {
+          title: "Cocos Creator + TypeScript",
+          description: "Component-based gameplay, scene flow, and core logic.",
+          order: 1,
+        },
+        {
+          title: "Seeded Procedural Generation",
+          description:
+            "Deterministic map layout from a seed using an LCG random generator.",
+          order: 2,
+        },
+        {
+          title: "Finite State Machines",
+          description:
+            "Game flow (IDLE/PLAYING/WIN/LOSE) and per-AI hider states.",
+          order: 3,
+        },
+        {
+          title: "Object Pooling",
+          description:
+            "Reusable prop nodes to reduce instantiate/destroy overhead.",
+          order: 4,
+        },
+      ],
+      loadout: [
+        {
+          title: "AI Hider System",
+          description:
+            "AI runs to a hide spot, transforms into a prop, and fools the player.",
+          order: 1,
+        },
+        {
+          title: "Smash Mechanic",
+          description:
+            "Nearest-prop scanning and raycast hit detection to reveal disguised AI.",
+          order: 2,
+        },
+        {
+          title: "Data-Driven Levels",
+          description:
+            "20 handcrafted JSON levels plus an infinite procedural level formula.",
+          order: 3,
+        },
+      ],
+      missionLog: [
+        "Built a procedural 3D map generator with deterministic seeded random.",
+        "Implemented AI hiders with a state machine and seeded hide-spot selection.",
+        "Created the smash-and-reveal mechanic with object pooling and raycast detection.",
+        "Developed a custom UI framework with animated popups and progress persistence.",
+      ],
+      coreFeatures: [
+        {
+          title: "AI prop disguise",
+          description: "AI hiders transform into props and blend into the map.",
+          order: 1,
+        },
+        {
+          title: "Procedural maps",
+          description:
+            "Seeded random generation for reproducible, varied levels.",
+          order: 2,
+        },
+        {
+          title: "Level progression",
+          description:
+            "Handcrafted and auto-generated levels with localStorage save.",
+          order: 3,
+        },
+      ],
+    },
+    // CV mentions "Link Video: Drive"; paste the actual Drive video URL here when available.
+    githubUrl: "https://gitlab.com/bthanhtek/hideandsmash",
+    storeLinks: [
+      {
+        label: "Play on Android",
+        href: "https://drive.google.com/file/d/1AVukO-vCHyyhvaycbH5Tf75CVhy2WuJM/view",
+        platform: "googlePlay",
+        order: 1,
+      },
+    ],
+    videoDemoUrl: "",
+    featured: true,
+    status: "published",
+    order: 8,
+  },
+  {
+    id: "tightrope-buddies",
+    slug: "tightrope-buddies",
+    title: "Tightrope Buddies",
+    type: "game",
+    shortDescription:
+      "A 3D endless tightrope-balancing mobile game built in Cocos Creator with TypeScript, featuring accelerometer tilt controls, physics-driven obstacles, a dynamic weather system, an endless recycled map, and a custom popup UI framework.",
+    description:
+      "Tightrope Buddies is a 3D mobile balancing game where the player auto-walks forward along a tightrope and tilts the device to stay balanced. Lean too far and you fall. Along the way the player jumps over and dodges obstacles (static birds, diving birds, and physics-thrown falling items of varying weight), each of which can knock the character into a timed balance challenge. A dynamic weather system (sunny, rain, wind) changes movement speed and pushes the player with wind gusts. The world is an endlessly recycled set of map chunks decorated with randomized props, and progress is measured by distance traveled with a persisted best score.",
+    thumbnail: LogoTig.src,
+    images: [
+      projectImage("TIGHTROPE BUDDIES", "#1f6f43", "#9be15d", "game"),
+      projectImage("KEEP YOUR BALANCE", "#14532d", "#34d399", "game"),
+    ],
+    techStack: [
+      "Cocos Creator 3.6",
+      "TypeScript",
+      "3D",
+      "Accelerometer Controls",
+      "Physics & Collisions",
+      "Object Pooling",
+    ],
+    archive: {
+      number: "04",
+      category: "Mobile 3D Game",
+      buttonLabel: "View Details",
+      tone: "yellow",
+      thumbnailBackground: "#1f6f43",
+    },
+    detail: {
+      levelLabel: "Level: 3D Endless Balancer",
+      overviewTitle: "Operational Overview",
+      overviewParagraphs: [
+        "Tightrope Buddies is a 3D mobile game built with Cocos Creator 3.6 and TypeScript, where the player walks an endless tightrope and tilts the device to keep balance.",
+        "The project includes accelerometer tilt control with a mouse fallback, a smooth follow camera, a jump arc with cooldown, an HP and balance-timer system, physics-driven obstacles, a dynamic weather system, an endlessly recycled decorated map, and a custom UI framework with animated popups.",
+      ],
+      specsTitle: "Tech Blueprints",
+      loadoutTitle: "Loadout",
+      missionTitle: "Development Log",
+      featuresTitle: "Core Features",
+      statusLabel: "Status: Personal Project",
+      stickerLabel: "Casual",
+      specs: [
+        {
+          title: "Cocos Creator + TypeScript",
+          description: "Component-based gameplay, scene flow, and core logic.",
+          order: 1,
+        },
+        {
+          title: "Accelerometer Tilt Control",
+          description:
+            "Device-motion input drives lean and balance, with a mouse fallback for browser play.",
+          order: 2,
+        },
+        {
+          title: "State-Driven Player",
+          description:
+            "Moving, balancing, jumping, and falling states with HP regen, damage, and a balance timer.",
+          order: 3,
+        },
+        {
+          title: "Object Pooling",
+          description:
+            "Endless map built from recycled chunks plus despawned obstacles to cut instantiate/destroy overhead.",
+          order: 4,
+        },
+      ],
+      loadout: [
+        {
+          title: "Physics Obstacle System",
+          description:
+            "Lane-based birds and projectile-thrown falling items use collision events to trigger a timed balance challenge.",
+          order: 1,
+        },
+        {
+          title: "Dynamic Weather",
+          description:
+            "Sunny, rain, and wind cycle on a timer, changing movement speed and applying random wind gusts.",
+          order: 2,
+        },
+        {
+          title: "Custom UI Framework",
+          description:
+            "Prefab-registry popup manager with lazy loading, animated start/pause popups, a paginated scroll view, and loading-scene transitions.",
+          order: 3,
+        },
+      ],
+      missionLog: [
+        "Built accelerometer tilt balancing with a lean/fall model and a timed balance-recovery challenge.",
+        "Implemented physics-driven obstacles, including projectile-thrown falling items and lane-based birds.",
+        "Created an endless recycled map with randomized decoration and a dynamic weather system.",
+        "Developed a custom popup UI framework with a character shop and localStorage persistence.",
+      ],
+      coreFeatures: [
+        {
+          title: "Tilt-to-balance",
+          description:
+            "Accelerometer-driven lean with a fall threshold and a recovery balance challenge.",
+          order: 1,
+        },
+        {
+          title: "Endless world",
+          description:
+            "Recycled map chunks with randomized decor and difficulty that scales with distance.",
+          order: 2,
+        },
+        {
+          title: "Progress & cosmetics",
+          description:
+            "Best-distance tracking, selectable characters, and audio settings saved to localStorage.",
+          order: 3,
+        },
+      ],
+    },
+    // TODO: replace with the actual TightropeBuddies repo URL (the hideandsmash link was Prop Hunt's).
+    githubUrl: "https://gitlab.com/bthanhtek/tightrope-buddies",
+    // TODO: add the real Android/Drive build link for this project if one exists.
+    storeLinks: [
+      {
+        label: "Play on Android",
+        href: "https://drive.google.com/file/d/1ZR3c4hxD5zaTc7DyRWLLbmSaD8bF47fI/view?usp=drive_link",
+        platform: "googlePlay",
+        order: 1,
+      },
+    ],
+    videoDemoUrl: "",
+    featured: true,
+    status: "published",
+    order: 9,
+  },
+  {
+    id: "impact-arena",
+    slug: "impact-arena",
+    title: "Impact Arena",
+    type: "game",
+    shortDescription:
+      "A 3D physics-based slingshot defense game built in Cocos Creator with TypeScript, where you fling charged projectiles to knock waves of kamikaze enemies into death pits across 20 data-driven levels.",
+    description:
+      "Impact Arena is a 3D casual mobile game where the player defends a fixed position by dragging to aim and charge a slingshot, then releasing to launch spinning physics projectiles. Incoming 'kamikaze' enemies (small, medium, and boss tiers) chase the player and explode with knockback on contact, so the player must time shots to knock them off the arena into death pits before they connect. The project features three projectile types with distinct speed and impact force, a randomized 5-slot ammo queue, wave-based enemy spawning from cone volumes, 20 JSON-configured levels with localStorage progress, a character selection shop, a custom prefab-driven popup UI framework, and a singleton audio manager.",
+    thumbnail: LogoImpact.src,
+
+    images: [
+      projectImage("IMPACT ARENA", "#1f6f43", "#9be15d", "game"),
+      projectImage("SLINGSHOT DEFENSE", "#14532d", "#34d399", "game"),
+    ],
+    techStack: [
+      "Cocos Creator 3.6",
+      "TypeScript",
+      "3D",
+      "Physics / RigidBody",
+      "State Machine",
+      "Data-Driven Levels",
+    ],
+    archive: {
+      number: "04",
+      category: "Mobile 3D Game",
+      buttonLabel: "View Details",
+      tone: "yellow",
+      thumbnailBackground: "#1f6f43",
+    },
+    detail: {
+      levelLabel: "Level: 3D Casual Physics Defense",
+      overviewTitle: "Operational Overview",
+      overviewParagraphs: [
+        "Impact Arena is a 3D casual mobile game built with Cocos Creator 3.6 and TypeScript, centered on a drag-to-aim slingshot mechanic and rigid-body physics.",
+        "The player charges and launches spinning projectiles to knock waves of chasing kamikaze enemies off the arena into death pits, across 20 data-driven levels with persistent progress, a character shop, and a custom popup-based UI framework.",
+      ],
+      specsTitle: "Tech Blueprints",
+      loadoutTitle: "Loadout",
+      missionTitle: "Development Log",
+      featuresTitle: "Core Features",
+      statusLabel: "Status: Personal Project",
+      stickerLabel: "Casual",
+      specs: [
+        {
+          title: "Cocos Creator + TypeScript",
+          description: "Component-based gameplay, scene flow, and core logic.",
+          order: 1,
+        },
+        {
+          title: "Rigid-Body Physics",
+          description:
+            "Projectile velocity, impulse knockback, custom fall gravity, and raycast ground checks.",
+          order: 2,
+        },
+        {
+          title: "Custom UI Framework",
+          description:
+            "Singleton prefab-based popup manager with loading, win/lose, pause, shop, and level-select screens.",
+          order: 3,
+        },
+        {
+          title: "Data-Driven Levels",
+          description:
+            "20 JSON level configs loaded and sorted at runtime, with localStorage progress persistence.",
+          order: 4,
+        },
+      ],
+      loadout: [
+        {
+          title: "Slingshot Shooting",
+          description:
+            "Drag to aim and charge, release to fire a spinning projectile whose speed scales with draw distance.",
+          order: 1,
+        },
+        {
+          title: "Kamikaze Enemy AI",
+          description:
+            "Enemies chase the player and explode with knockback; defeated by knocking them into death pits.",
+          order: 2,
+        },
+        {
+          title: "Ammo Queue + Shop",
+          description:
+            "Randomized 5-slot bullet queue across three projectile tiers, plus a character selection shop.",
+          order: 3,
+        },
+      ],
+      missionLog: [
+        "Built a drag-to-aim slingshot system with charge-based projectile speed and rotating bullet visuals.",
+        "Implemented kamikaze enemies with chase, explode-and-knockback behavior, and raycast ground detection.",
+        "Created wave-based enemy spawning from cone volumes with a data-driven 20-level JSON system.",
+        "Developed a custom prefab-driven popup UI framework with scene preloading and localStorage progress.",
+      ],
+      coreFeatures: [
+        {
+          title: "Physics knockback combat",
+          description:
+            "Knock chasing enemies off the arena into death pits using projectile impulse.",
+          order: 1,
+        },
+        {
+          title: "Wave-based levels",
+          description:
+            "Small, medium, and boss enemy tiers spawned in shuffled waves per level config.",
+          order: 2,
+        },
+        {
+          title: "Level progression",
+          description:
+            "20 JSON-defined levels with unlock tracking and localStorage save.",
+          order: 3,
+        },
+      ],
+    },
+    githubUrl: "https://gitlab.com/bthanhtek/impact-arena",
+    storeLinks: [
+      {
+        label: "Play on Android",
+        href: "https://drive.google.com/file/d/1xplpXakjPUApwTNp6ct8lWfkST_xAZhG/view?usp=drive_link",
+        platform: "googlePlay",
+        order: 1,
+      },
+    ],
+    videoDemoUrl: "",
+    featured: true,
+    status: "published",
+    order: 10,
+  },
+  {
+    id: "legacy-runner-game",
+    slug: "legacy-runner-game",
+    title: "Legacy Runner Game",
+    type: "game",
+    shortDescription:
+      "A Unity-based runner combat game where the player runs on a straight path, collects power items, moves vertically to avoid obstacles, then enters an end-game flying attack phase to break walls and fight a boss.",
+    description:
+      "Legacy Runner Game is a casual runner-combat prototype built with Unity and C#. The player automatically runs forward on a straight path, collects items to increase power, and moves up or down to avoid obstacles and prepare for the final stage. At the end of the level, the player switches into a flying attack sequence, breaking through multiple walls based on accumulated power before entering a boss fight. The project focuses on simple runner controls, item collection, power progression, obstacle interaction, wall-breaking logic, boss phase transition, UI feedback, and stable gameplay flow.",
+    thumbnail: LogoLegacy.src,
+    images: [
+      projectImage("LEGACY RUNNER", "#3b2f2f", "#facc15", "game"),
+      projectImage("WALL BREAK BOSS FIGHT", "#1f2937", "#f97316", "game"),
+    ],
+    techStack: [
+      "Unity",
+      "C#",
+      "3D Runner",
+      "Gameplay Programming",
+      "Rigidbody / Collider",
+      "State Machine",
+      "UI System",
+    ],
+    archive: {
+      number: "05",
+      category: "Unity Runner Game",
+      buttonLabel: "View Details",
+      tone: "pink",
+      thumbnailBackground: "#3b2f2f",
+    },
+    detail: {
+      levelLabel: "Level: 3D Casual Runner Combat",
+      overviewTitle: "Operational Overview",
+      overviewParagraphs: [
+        "Legacy Runner Game is a Unity-based runner combat prototype focused on auto-running movement, item collection, power scaling, and end-game combat progression.",
+        "The player runs on a straight path, collects power items, avoids obstacles through vertical movement, then enters a flying attack phase to destroy walls and continue into a boss battle.",
+      ],
+      specsTitle: "Tech Blueprints",
+      loadoutTitle: "Loadout",
+      missionTitle: "Development Log",
+      featuresTitle: "Core Features",
+      statusLabel: "Status: Personal Project",
+      stickerLabel: "Runner",
+      specs: [
+        {
+          title: "Unity + C#",
+          description:
+            "Implemented core gameplay logic, player control, scene flow, and game state handling.",
+          order: 1,
+        },
+        {
+          title: "Runner Gameplay System",
+          description:
+            "Auto-running movement with vertical lane-style control, item collection, and obstacle interaction.",
+          order: 2,
+        },
+        {
+          title: "Power Progression",
+          description:
+            "Collected items increase player power and influence the final wall-breaking sequence.",
+          order: 3,
+        },
+        {
+          title: "Game State Flow",
+          description:
+            "Managed transitions between running, flying attack, wall-breaking, and boss fight phases.",
+          order: 4,
+        },
+      ],
+      loadout: [
+        {
+          title: "Auto-Runner Movement",
+          description:
+            "Player automatically runs forward while moving vertically to collect items and avoid obstacles.",
+          order: 1,
+        },
+        {
+          title: "Wall-Breaking Sequence",
+          description:
+            "At the end of the level, the player flies forward and breaks multiple walls based on accumulated power.",
+          order: 2,
+        },
+        {
+          title: "Boss Fight Phase",
+          description:
+            "After clearing the wall sequence, the player transitions into a simple boss battle stage.",
+          order: 3,
+        },
+      ],
+      missionLog: [
+        "Built an auto-running player controller with vertical movement and smooth gameplay flow.",
+        "Implemented item collection, power accumulation, obstacle interaction, and progress feedback.",
+        "Created an end-game flying attack sequence where the player breaks through multiple walls.",
+        "Developed basic boss fight logic and state transitions between runner, wall-breaking, and combat phases.",
+        "Added UI feedback for power level, player progress, and stage transitions.",
+      ],
+      coreFeatures: [
+        {
+          title: "Item-based power scaling",
+          description:
+            "Collect items during the run to increase power and improve final-stage performance.",
+          order: 1,
+        },
+        {
+          title: "End-game wall breaking",
+          description:
+            "Player flies forward and destroys sequential walls before entering the boss phase.",
+          order: 2,
+        },
+        {
+          title: "Boss battle transition",
+          description:
+            "Game flow changes from runner mode into a simple combat encounter after the wall sequence.",
+          order: 3,
+        },
+      ],
+    },
+    githubUrl: "",
+    storeLinks: [
+      {
+        label: "Link Down Game APK",
+        href: "https://play.google.com/store/apps/details?id=jp.bap.game.legacyrunner&hl=en",
+        platform: "googlePlay",
+        order: 1,
+      },
+    ],
+    videoDemoUrl: "",
+    featured: true,
+    status: "published",
+    order: 11,
   },
   {
     id: "draft-admin",

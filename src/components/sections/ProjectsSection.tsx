@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useMemo, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import type { Project, ProjectArchiveContent } from "@/types/portfolio";
 import { MotionSection } from "@/components/ui/MotionSection";
 import { ProjectCard } from "@/components/project/ProjectCard";
@@ -18,7 +19,18 @@ type ProjectFilterId = ProjectArchiveContent["filters"][number]["id"];
 interface ProjectsSectionProps {
   projects: Project[];
   content: ProjectArchiveContent;
+  initialFilter?: string;
 }
+
+const getValidFilter = (
+  filterId: string | null | undefined,
+  filters: ProjectArchiveContent["filters"],
+): ProjectFilterId => {
+  const fallbackFilter = filters[0]?.id ?? "all";
+  return filters.some((filter) => filter.id === filterId)
+    ? (filterId as ProjectFilterId)
+    : fallbackFilter;
+};
 
 const matchesFilter = (project: Project, filterId: ProjectFilterId) => {
   const normalizedFilter = filterId.toLowerCase();
@@ -48,14 +60,33 @@ const matchesFilter = (project: Project, filterId: ProjectFilterId) => {
   );
 };
 
-export function ProjectsSection({ projects, content }: ProjectsSectionProps) {
+export function ProjectsSection({ projects, content, initialFilter }: ProjectsSectionProps) {
+  const pathname = usePathname();
+  const router = useRouter();
   const [activeFilter, setActiveFilter] = useState<ProjectFilterId>(
-    content.filters[0]?.id ?? "all",
+    getValidFilter(initialFilter, content.filters),
   );
   const filteredProjects = useMemo(
     () => projects.filter((project) => matchesFilter(project, activeFilter)),
     [activeFilter, projects],
   );
+
+  useEffect(() => {
+    const syncFilterFromUrl = () => {
+      const params = new URLSearchParams(window.location.search);
+      setActiveFilter(getValidFilter(params.get("filter"), content.filters));
+    };
+
+    window.addEventListener("popstate", syncFilterFromUrl);
+    return () => window.removeEventListener("popstate", syncFilterFromUrl);
+  }, [content.filters]);
+
+  const handleFilterClick = (filterId: ProjectFilterId) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("filter", filterId);
+    setActiveFilter(filterId);
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  };
 
   return (
     <MotionSection
@@ -85,7 +116,7 @@ export function ProjectsSection({ projects, content }: ProjectsSectionProps) {
               activeFilter === filter.id ? "translate-x-1 translate-y-1 shadow-none" : ""
             }`}
             key={filter.id}
-            onClick={() => setActiveFilter(filter.id)}
+            onClick={() => handleFilterClick(filter.id)}
             type="button"
           >
             {filter.label}
